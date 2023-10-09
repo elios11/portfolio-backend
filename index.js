@@ -3,13 +3,14 @@ import { connectToDb, getDb } from "./db.js";
 
 /* Initialize express app */
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 /* Database connection */
 let db;
 connectToDb((err) => {
     if (!err) {
-        app.listen(3000, () => {
-            console.log("Listening on http://localhost:3000/");
+        app.listen(PORT, () => {
+            console.log(`Listening on ${PORT}`);
         });
         db = getDb();
     }
