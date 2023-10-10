@@ -18,16 +18,37 @@ connectToDb((err) => {
 
 /* Enable CORS */
 app.use((req, res, next) => {
-    res.header(
-        "Access-Control-Allow-Origin",
-        "http://localhost:5173, https://eliasferreira.netlify.app/"
-    );
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET");
     res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 });
 
 /* Routes */
+app.get("/info", (req, res) => {
+    const homeInfo = [];
+
+    db.collection("info")
+        .find()
+        .forEach((document) => homeInfo.push(document))
+        .then(() => res.status(200).json(homeInfo))
+        .catch(() =>
+            res.status(500).json({ error: "Could not fetch the documents" })
+        );
+});
+
+app.get("/about", (req, res) => {
+    const aboutInfo = [];
+
+    db.collection("about")
+        .find()
+        .forEach((document) => aboutInfo.push(document))
+        .then(() => res.status(200).json(aboutInfo))
+        .catch(() =>
+            res.status(500).json({ error: "Could not fetch the documents" })
+        );
+});
+
 app.get("/projects", (req, res) => {
     const projects = [];
 
@@ -35,17 +56,6 @@ app.get("/projects", (req, res) => {
         .find()
         .forEach((project) => projects.push(project))
         .then(() => res.status(200).json(projects))
-        .catch(() =>
-            res.status(500).json({ error: "Could not fetch the documents" })
-        );
-});
-
-app.get("/info", (req, res) => {
-    const info = [];
-    db.collection("info")
-        .find()
-        .forEach((project) => info.push(project))
-        .then(() => res.status(200).json(info))
         .catch(() =>
             res.status(500).json({ error: "Could not fetch the documents" })
         );
