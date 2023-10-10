@@ -4,7 +4,7 @@ import { connectToDb, getDb } from "./db.js";
 /* Initialize express app */
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SERVER_URI = import.meta.env.SERVER_URI;
+const SERVER_URI = import.meta.env.APP_URL;
 
 /* Database connection */
 let db;
@@ -19,7 +19,7 @@ connectToDb((err) => {
 
 /* Enable CORS */
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", SERVER_URI);
+    res.header("Access-Control-Allow-Origin", APP_URL);
     res.header("Access-Control-Allow-Methods", "GET");
     res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
