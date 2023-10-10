@@ -4,7 +4,7 @@ import { connectToDb, getDb } from "./db.js";
 /* Initialize express app */
 const app = express();
 const PORT = process.env.PORT || 3000;
-const APP_URL = import.meta.env.APP_URL;
+const APP_URL = process.env.APP_URL;
 
 /* Database connection */
 let db;
