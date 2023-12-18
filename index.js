@@ -54,6 +54,7 @@ app.get("/projects", (req, res) => {
 
     db.collection("projects")
         .find()
+        .sort({ id: 1 })
         .forEach((project) => projects.push(project))
         .then(() => res.status(200).json(projects))
         .catch(() =>
