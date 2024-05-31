@@ -61,3 +61,5 @@ app.get("/projects", (req, res) => {
             res.status(500).json({ error: "Could not fetch the documents" })
         );
 });
+
+export default app;
