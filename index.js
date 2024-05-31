@@ -16,17 +16,17 @@ connectToDb((err) => {
     }
 });
 
-/* Home route */
-app.get("/", (req, res) => {
-    res.status(200).json({ message: "Welcome to the API" });
-});
-
 /* Enable CORS */
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET");
     res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
+});
+
+/* Home route */
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Welcome to the API" });
 });
 
 /* Routes */
@@ -66,5 +66,3 @@ app.get("/projects", (req, res) => {
             res.status(500).json({ error: "Could not fetch the documents" })
         );
 });
-
-export default app;
